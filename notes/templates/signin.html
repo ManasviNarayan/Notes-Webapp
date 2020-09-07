@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>A Minimal Notes App</h4>
+<div class="login card"></div>
+    <div class="card text-white bg-primary mb-3 " style="max-width: 20rem;">
+        <h3 class="card-header"> Sign In </h3>
+        <div class="card-body">
+            <form action="">
+                <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <br>
+                <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1">
+                <br>
+                <input type="submit" value="Log In" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+
+    <h6>Not yet registered? <a href="{{url_for('signup')}}"><button class="btn btn-dark">Sign Up!</button></a></h6>
+</div>
+{% endblock %}

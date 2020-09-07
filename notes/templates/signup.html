@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card text-white bg-primary mb-3 " style="max-width: 20rem;">
+    <h3 class="card-header"> Register </h3>
+    <div class="card-body">
+        <form action="">
+            <label for="inputDefault">Username</label>
+            <input type="text"  class="form-control" id="inputDefault">
+            <br>
+            <label for="exampleInputEmail1">Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <br>
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password"  class="form-control" id="exampleInputPassword1">
+            <br>
+            <input type="submit" value="Submit" class="btn btn-secondary">
+        </form>
+    </div>
+</div>
+{% endblock %}
