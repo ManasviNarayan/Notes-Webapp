@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if delete %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p class="mb-0">{{msg}}</p>
+                <a href="{{url_for('delete_notebook', notebook_id= notebook['_id'])}}"  class="btn btn-secondary btn-sm">Delete Notebook</a>
+            </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+{% endif %}
+
+{% if edit %}
+<div class="jumbotron">
+    <form action="{{url_for('save_changes', notebook_id= notebook['_id'])}} " method = "POST">
+        <input type="text" name="name" class="form-control" value="{{notebook['name']}}" id="inputDefault" spellcheck="false" data-ms-editor="true" method="POST">
+        <br><input type="text" name="description" class="form-control" value="{{notebook['description']}}" id="inputDefault" spellcheck="false" data-ms-editor="true" method="POST">
+        <br><input type="submit" name="save" class="btn btn-outline-primary btn-sm" value="save changes" >    
+    </form>
+
+</div>
+{% else %}
+<div class="jumbotron">
+    <h1 class="display-6">{{notebook['name']}}</h1> 
+    <p style="white-space:pre-wrap;">{{notebook['description']}}</p>
+    <hr class="my-4">
+    <form action="{{url_for('notebook', notebook_id = notebook['_id'])}}" method="POST">
+        <input type="submit" name="edit" class="btn btn-outline-primary btn-sm" value="Edit notebook" >    
+        <input type="submit" name="delete" class="btn btn-outline-danger btn-sm " value="Delete notebook" >
+    </form>
+</div>
+{% endif %}
+
+<div id="card" class="card text-white bg-dark mb-3" style="max-width: 70rem;">
+    <div class="card-header">
+       <h5 class="text-white">  Your Notes  </h5>
+       <a href="{{url_for('new_note', notebook_id= notebook['_id'])}}"  class="btn btn-secondary btn-sm">New Note</a>
+    </div>
+</div>
+
+
+
+<div id="card" class="card bg-secondary mb-3 card-body" style="max-width: 70rem; max-height: 25rem; margin-top: 0px; flex-direction: row; overflow-y: scroll; -webkit-flex-wrap: wrap; flex-wrap: wrap;">
+    {% for note in all_notes %}
+    <a href="{{url_for('note', note_id = note['_id'], notebook_id = notebook['_id'])}}">
+        <div id="notebook" class="card text-white bg-dark mb-3" style="max-width: 15rem;min-height: 10rem; max-height: 10rem; overflow: hidden; float: left;">
+            <div class="card-header">{{note['title']}}</div>
+            <div class="card-body">
+            <p class="card-text" style="white-space: pre-wrap;">{{note['note']}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
