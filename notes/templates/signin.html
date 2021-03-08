@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>A Minimal Notes App</h4>
+    <div id="card" class="card text-white bg-dark mb-3 " style="max-width: 20rem;">
+        <h3 class="card-header"> Sign In </h3>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <p class="mb-0">{{msg}}</p> 
+                    </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="card-body">
+            <form action="{{url_for('signin')}}", method='POST'>
+                <input type="email" name="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <br>
+                <input type="password" name="password" placeholder="Password" class="form-control" id="exampleInputPassword1">
+                <br>
+                <input type="submit" value="Log In" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+
+    <h6>Not yet registered? <a href="{{url_for('signup')}}"><button class="btn btn-dark">Sign Up!</button></a></h6>
+</div>
+{% endblock %}

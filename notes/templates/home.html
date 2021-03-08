@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron" style="background-color: rgba(255,255,255,0.4);">
+    <h1 class="display-6">Hi, {{user['username']}}</h1>
+    Welcome To Notes
+</div>
+
+
+<div id="card" class="card text-white bg-dark mb-3" style="max-width: 70rem;">
+    <div class="card-header">
+       <h5 class="text-white">  Your Notebooks   </h5>
+       <a href="{{url_for('new_notebook')}}"  class="btn btn-secondary btn-sm">New Notebook</a>
+    </div>
+</div>
+
+
+
+<div id="card" class="card  mb-3 card-body" style="max-width: 70rem; max-height: 25rem; margin-top: 0px; flex-direction: row; overflow-y: scroll; -webkit-flex-wrap: wrap; flex-wrap: wrap;background-color: rgba(255,255,255,0.7);">
+    {% for name in names %}
+    <a href="{{url_for('notebook', notebook_id = name['_id'])}}">
+        <div id="notebook" class="card text-white bg-dark mb-3" style="">
+            <div class="card-header">{{name['name']}}</div>
+            <div class="card-body">
+            <p class="card-text" style="white-space: pre-wrap;">{{name['description']}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
